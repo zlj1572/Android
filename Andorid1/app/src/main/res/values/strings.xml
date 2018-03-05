@@ -1,3 +1,22 @@
 <resources>
-    <string name="app_name">Andorid Project</string>
+    <string name="app_name">Calculate</string>
+    <string name="NAME_sub">-</string>
+    <string name="NAME_plus">+</string>
+    <string name="NAME_multy">×</string>
+    <string name="NAME_dev">÷</string>
+    <string name="NAME_oppo">+/-</string>
+    <string name="NAME_ac">AC</string>
+    <string name="NAME_equ">=</string>
+    <string name="NAME_percente">%</string>
+    <string name="NAME_1">1</string>
+    <string name="NAME_2">2</string>
+    <string name="NAME_3">3</string>
+    <string name="NAME_4">4</string>
+    <string name="NAME_5">5</string>
+    <string name="NAME_6">6</string>
+    <string name="NAME_7">7</string>
+    <string name="NAME_8">8</string>
+    <string name="NAME_9">9</string>
+    <string name="NAME_0">0</string>
+    <string name="NAME_point">.</string>
 </resources>
