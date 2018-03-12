@@ -116,31 +116,45 @@ public class MainActivity extends AppCompatActivity implements OnClickListener{
                     Continue=false;
                     if(text.equals(""))
                     text=text+"0.";
+                    else
+                        text=text+".";
                     print_num.setText(text);
                     break;
                 }
             }
         }
         switch (view.getId()) {
-            case R.id.buttonAC:text="";P_num=false;print_num.setText("0");break;
+            case R.id.buttonAC:text="";num1=0;num2=0;P_num=false;print_num.setText("0");break;
             case R.id.buttonpercent:{
-                Double temp=Double.parseDouble(text)/100;
-                text=Double.toString(temp);
-                if(text.length()>8) {
-                    //String Round_string=Double.toString(temp);
-                    //String Round_string= String.format("%.5f",temp);
-                    //BigDecimal Round_num=new BigDecimal(text);
-                    //String Round_string=Round_num.setScale(6,BigDecimal.ROUND_UP).toString();
-                    //print_num.setText(Round_string);
-                    print_num.setText(new DecimalFormat("#.#####E0").format(temp));
+                if(!text.equals("")) {
+                    String num_string;
+                    Double temp;
+                    if (text.equals("") && Continue) {
+                        num1 = num1 / 100;
+                        num_string = Double.toString(num1);
+                        temp = num1;
+                    } else {
+                        temp = Double.parseDouble(text) / 100;
+                        num_string = Double.toString(temp);
+                        text = num_string;
+                    }
+                    if (num_string.length() > 8) {
+                        //print_num.setText("0");
+                        //String Round_string=Double.toString(temp);
+                        //String Round_string= String.format("%.5f",temp);
+                        //BigDecimal Round_num=new BigDecimal(text);
+                        //String Round_string=Round_num.setScale(6,BigDecimal.ROUND_UP).toString();
+                        //print_num.setText(Round_string);
+                        print_num.setText(new DecimalFormat("#.###E0").format(temp));
+                        //print_num.setText(num_string);
+                    } else
+                        print_num.setText(num_string);
                 }
-                else
-                    print_num.setText(text);
-                break;
+                    break;
             }
             case R.id.buttondev: {
                 flag=1;
-                if(!Continue) {
+                if(!Continue&&flag==1&&!text.equals("")) {
                     num1 = Double.parseDouble(text);
                     text = "";
                 }
@@ -149,7 +163,7 @@ public class MainActivity extends AppCompatActivity implements OnClickListener{
             }
             case R.id.buttonmulty: {
                 flag=2;
-                if(!Continue) {
+                if(!Continue&&flag==2&&!text.equals("")) {
                     num1 = Double.parseDouble(text);
                     text = "";
                 }
@@ -158,7 +172,7 @@ public class MainActivity extends AppCompatActivity implements OnClickListener{
             }
             case R.id.buttonsub: {
                 flag=3;
-                if(!Continue) {
+                if(!Continue&&flag==3&&!text.equals("")) {
                     num1 = Double.parseDouble(text);
                     text = "";
                 }
@@ -167,7 +181,7 @@ public class MainActivity extends AppCompatActivity implements OnClickListener{
             }
             case R.id.buttonplus: {
                 flag=4;
-                if(!Continue) {
+                if(!Continue&&flag==4&&!text.equals("")) {
                     num1 = Double.parseDouble(text);
                     text = "";
                 }
@@ -175,6 +189,7 @@ public class MainActivity extends AppCompatActivity implements OnClickListener{
                 break;
             }
             case R.id.buttonoppo: {
+                if(!text.equals(""))
                 if(!Continue) {
                     int len = text.length();
                     num1 = Double.parseDouble(text);
