@@ -15,9 +15,9 @@ import android.view.View.OnClickListener;
 
 public class MainActivity extends AppCompatActivity implements OnClickListener{
     private String text="";
-    private int flag;
-    private boolean P_num,Continue;
-    private double num1,num2,res;
+    private int flag,flag_D,Convert_num;
+    private boolean P_num,Continue,Sub;
+    private double num1,num2,res,oppo_num,tem_num;
     private Button button_0 = null;
     private Button button_1 = null;
     private Button button_2 = null;
@@ -37,6 +37,10 @@ public class MainActivity extends AppCompatActivity implements OnClickListener{
     private Button button_ac = null;
     private Button button_oppo = null;
     private Button button_percent = null;
+    private Button button_sin = null;
+    private Button button_cos = null;
+    private Button button_Mm = null;
+    private Button button_Convert = null;
     private TextView print_num = null;
         @Override
         protected void onCreate(Bundle savedInstanceState) {
@@ -61,6 +65,10 @@ public class MainActivity extends AppCompatActivity implements OnClickListener{
             button_ac = (Button) findViewById(R.id.buttonAC);
             button_oppo = (Button) findViewById(R.id.buttonoppo);
             button_percent = (Button) findViewById(R.id.buttonpercent);
+            button_sin = (Button) findViewById(R.id.buttonsin);
+            button_cos = (Button) findViewById(R.id.buttoncos);
+            button_Mm = (Button) findViewById(R.id.buttonMm);
+            button_Convert = (Button) findViewById(R.id.buttonConvert);
             button_0.setOnClickListener(this);
             button_1.setOnClickListener(this);
             button_2.setOnClickListener(this);
@@ -80,15 +88,66 @@ public class MainActivity extends AppCompatActivity implements OnClickListener{
             button_equ.setOnClickListener(this);
             button_ac.setOnClickListener(this);
             button_oppo.setOnClickListener(this);
+            button_sin.setOnClickListener(this);
+            button_cos.setOnClickListener(this);
+            button_Mm.setOnClickListener(this);
+            button_Convert.setOnClickListener(this);
             print_num = (TextView) findViewById((R.id.text));
             P_num = false;
             flag=5;
+            flag_D=0;
             Continue=false;
+            res=0;
+            Sub=false;
         }
 
-
+        public void  Calculator_Conutining() {
+                if (!text.equals("") && flag_D == 1) {
+                    if (!Sub)
+                        num1 = num1 / Double.parseDouble(text) + res;
+                    else {
+                        num1 = res - num1 / Double.parseDouble(text);
+                        Sub = false;
+                    }
+                    res = num1;
+                    num1=0;
+                    text = "";
+                } else if (!text.equals("") && flag_D == 2) {
+                    if (!Sub)
+                        num1 = num1 * Double.parseDouble(text) + res;
+                    else {
+                        num1 = res - num1 * Double.parseDouble(text);
+                        Sub = false;
+                    }
+                    res = num1;
+                    num1=0;
+                    text = "";
+                } else if ((flag == 3 && !text.equals("") && flag_D == 3) || (flag == 4 && !text.equals("") && flag_D == 3)) {
+                    num1 = num1 - Double.parseDouble(text) + res;
+                    res = num1;
+                    num1=0;
+                    text = "";
+                } else if ((flag == 3 && !text.equals("") && flag_D == 4) || (flag == 4 && !text.equals("") && flag_D == 4)) {
+                    num1 = num1 + Double.parseDouble(text) + res;
+                    res = num1;
+                    num1=0;
+                    text = "";
+                } else {
+                    if(res==0) {
+                        if (flag_D == 4)
+                            res = num1;
+                        if (flag_D == 3) {
+                            res = num1;
+                        }
+                    }
+                    if(flag_D==3)
+                        Sub=true;
+                        num1 = Double.parseDouble(text);
+                        text = "";
+                }
+        }
     @Override
-    public void onClick(View view) {
+        public void onClick(View view) {
        // TextView print_num = (TextView) findViewById((R.id.text));
         if(text.length()<6)
         switch (view.getId()) {
@@ -124,9 +183,8 @@ public class MainActivity extends AppCompatActivity implements OnClickListener{
             }
         }
         switch (view.getId()) {
-            case R.id.buttonAC:text="";num1=0;num2=0;P_num=false;print_num.setText("0");break;
+            case R.id.buttonAC:text="";num1=0;num2=0;P_num=false;flag_D=0;res=0;print_num.setText("0");Sub=false;break;
             case R.id.buttonpercent:{
-                if(!text.equals("")) {
                     String num_string;
                     Double temp;
                     if (text.equals("") && Continue) {
@@ -149,63 +207,95 @@ public class MainActivity extends AppCompatActivity implements OnClickListener{
                         //print_num.setText(num_string);
                     } else
                         print_num.setText(num_string);
-                }
                     break;
             }
             case R.id.buttondev: {
                 flag=1;
-                if(!Continue&&flag==1&&!text.equals("")) {
-                    num1 = Double.parseDouble(text);
-                    text = "";
+                if(flag==1&&!text.equals("")&&flag_D!=0) {
+                        Calculator_Conutining();
+                        flag_D = 1;
+                }
+                if(flag==1&&flag_D==0) {
+                    if(!Continue&&!text.equals("")) {
+                        num1 = Double.parseDouble(text);
+                        text = "";
+                    }
+                    flag_D = 1;
                 }
                 P_num=false;
                 break;
             }
             case R.id.buttonmulty: {
                 flag=2;
-                if(!Continue&&flag==2&&!text.equals("")) {
-                    num1 = Double.parseDouble(text);
-                    text = "";
+                if(flag==2&&!text.equals("")&&flag_D!=0) {
+                    Calculator_Conutining();
+                    flag_D=2;
+                }
+                if(flag==2&&flag_D==0) {
+                    if(!Continue&&!text.equals("")) {
+                        num1 = Double.parseDouble(text);
+                        text = "";
+                    }
+                    flag_D=2;
                 }
                 P_num=false;
                 break;
             }
             case R.id.buttonsub: {
                 flag=3;
-                if(!Continue&&flag==3&&!text.equals("")) {
-                    num1 = Double.parseDouble(text);
-                    text = "";
+                if(flag==3&&!text.equals("")&&flag_D!=0) {
+                    Calculator_Conutining();
+                    flag_D=3;
+                }
+                if(flag==3&&flag_D==0) {
+                    if(!Continue&&!text.equals("")) {
+                        num1 = Double.parseDouble(text);
+                        text = "";
+                    }
+                    flag_D=3;
                 }
                 P_num=false;
                 break;
             }
             case R.id.buttonplus: {
                 flag=4;
-                if(!Continue&&flag==4&&!text.equals("")) {
-                    num1 = Double.parseDouble(text);
-                    text = "";
+                if(flag==4&&!text.equals("")&&flag_D!=0){
+                    Calculator_Conutining();
+                    flag_D=4;
+                }
+                if(flag==4&&flag_D==0) {
+                    if(!Continue&&!text.equals("")){
+                        num1 = Double.parseDouble(text);
+                        text = "";
+                    }
+                    flag_D=4;
                 }
                 P_num=false;
                 break;
             }
             case R.id.buttonoppo: {
-                if(!text.equals(""))
-                if(!Continue) {
-                    int len = text.length();
-                    num1 = Double.parseDouble(text);
-                    num1 = 0 - num1;
-                    text = Double.toString(num1);
-                    if ((Math.floor(num1) - num1) == 0 && text.length() == len) {
-                        BigDecimal Round_num = new BigDecimal(text);
-                        text="";
-                        text = Round_num.setScale(0, BigDecimal.ROUND_UP).toString();
+                if(!text.equals("")) {
+                    if (!Continue) {
+                        int len = text.length();
+                        oppo_num = Double.parseDouble(text);
+                        oppo_num = 0 - oppo_num;
+                        if (oppo_num<0)
+                            len+=1;
+                        else
+                            len-=1;
+                        text = Double.toString(oppo_num);
+                        if ((Math.floor(oppo_num) - oppo_num) == 0 && !P_num) {
+                            BigDecimal Round_num = new BigDecimal(text);
+                            text = "";
+                            text = Round_num.setScale(0, BigDecimal.ROUND_UP).toString();
+                        }
+                        print_num.setText(text);
                     }
-                    print_num.setText(text);
                 }
-                else{
-                    num1=0-num1;
+                else {
+                    num1 = 0 - num1;
                     String num_String = Double.toString(num1);
-                    if(num_String.length()>7)
+                    if (num_String.length() > 7)
                         print_num.setText(new DecimalFormat("#.##E0").format(num1));
                     else {
                         if ((Math.floor(num1) - num1) == 0) {
@@ -214,33 +304,105 @@ public class MainActivity extends AppCompatActivity implements OnClickListener{
                             print_num.setText(num_String);
                         } else {
                             print_num.setText(num_String);
+                            }
                         }
                     }
+                break;
+            }
+            case R.id.buttonConvert:{
+                if(!text.equals(""))
+                {
+                    Convert_num = (int)Double.parseDouble(text);
+                    //text = Integer.toHexString(Convert_num);
+                    text = Integer.toBinaryString(Convert_num);
+                    print_num.setText(text);
+                }
+                else
+                {
+                    Convert_num = (int)num1;
+                    text = Integer.toBinaryString(Convert_num);
+                    print_num.setText(text);
+                }
+                break;
+            }
+            case R.id.buttonMm:{
+                if(!text.equals("")) {
+                    tem_num = Double.parseDouble(text);
+                    tem_num = tem_num * 1.8+32;
+                    text=Double.toString(tem_num);
+                }
+                else
+                {
+                    text="273.15";
+                }
+                print_num.setText(text);
+                break;
+            }
+            case R.id.buttonsin:{
+                if(!text.equals("")) {
+                    if (!Continue) {
+                        int len = text.length();
+                        oppo_num = Double.parseDouble(text);
+                        oppo_num = Math.sin(oppo_num);
+                        text = Double.toString(oppo_num);
+                        print_num.setText(text);
+                    }
+                }
+                else {
+                    num1 = Math.sin(num1);
+                    String num_String = Double.toString(num1);
+                    if (num_String.length() > 7)
+                        print_num.setText(new DecimalFormat("#.##E0").format(num1));
+                }
+                break;
+            }
+            case R.id.buttoncos:{
+                if(!text.equals("")) {
+                    if (!Continue) {
+                        int len = text.length();
+                        oppo_num = Double.parseDouble(text);
+                        oppo_num = Math.cos(oppo_num);
+                        text = Double.toString(oppo_num);
+                        print_num.setText(text);
+                    }
+                }
+                else {
+                    num1 = Math.cos(num1);
+                    String num_String = Double.toString(num1);
+                    if (num_String.length() > 7)
+                        print_num.setText(new DecimalFormat("#.##E0").format(num1));
                 }
                 break;
             }
             case R.id.buttonequ: {
                 P_num=false;
+                flag_D=0;
                 if(text.equals(""))
                     num2=0.0;
                 else
                     num2 = Double.parseDouble(text);
                 if(flag==1) {
                     if(num2!=0.0)
-                        res = num1 / num2;
+                        if(!Sub)
+                            res = res+ num1 / num2;
+                        else
+                                res =res - num1/num2;
                     else {
                         print_num.setText("Infinity");
                         break;
                     }
                 }
                 else if(flag==2){
-                   res=num1*num2;
+                    if(!Sub)
+                        res=res+num1*num2;
+                    else
+                        res=res-num1*num2;
                 }
                 else if(flag==3){
-                    res=num1-num2;
+                    res=res+num1-num2;
                 }
                 else if(flag==4) {
-                    res=num1+num2;
+                    res=res+num1+num2;
                 }
                 else {
                     if(!text.equals(""))
@@ -265,9 +427,11 @@ public class MainActivity extends AppCompatActivity implements OnClickListener{
                     }
                 }
                 num1=res;
+                res=0;
                 text="";
                 Continue=true;
                 flag=5;
+                Sub=false;
                 break;
             }
         }
