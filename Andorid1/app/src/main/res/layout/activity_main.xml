@@ -1,50 +1,382 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#141414"
-    tools:context="com.example.administrator.andoridproject.MainActivity"
-    tools:layout_editor_absoluteY="81dp"
-    tools:layout_editor_absoluteX="0dp">
-   <LinearLayout
-       android:layout_width="wrap_content"
-       android:layout_height="wrap_content"
-       tools:layout_editor_absoluteY=""
-       tools:layout_editor_absoluteX="8dp"
-       android:orientation="vertical">
-       <Button
-           android:id="@+id/buttonAC"
-           android:text="@string/NAME_ac"
-           android:textSize="25sp"
-           android:background="#C1C1C1"
-           android:layout_width="wrap_content"
-           android:layout_height="0dp"
-           android:layout_weight="1"/>
-       <Button
-           android:id="@+id/button7"
-           android:layout_width="wrap_content"
-           android:text="@string/NAME_7"
-           android:textSize="25sp"
-           android:background="#616161"
-           android:layout_height="0dp"
-           android:layout_weight="1"/>
-       <Button
-           android:id="@+id/button4"
-           android:layout_width="wrap_content"
-           android:text="@string/NAME_4"
-           android:textSize="25sp"
-           android:background="#616161"
-           android:layout_height="0dp"
-           android:layout_weight="1"/>
-       <Button
-           android:id="@+id/button1"
-           android:layout_width="wrap_content"
-           android:text="@string/NAME_1"
-           android:textSize="25sp"
-           android:background="#616161"
-           android:layout_height="0dp"
-           android:layout_weight="1"/>
-   </LinearLayout>
-</android.support.constraint.ConstraintLayout>
+    android:background="#0A0A0A"
+    tools:context="com.example.administrator.andoridproject.MainActivity">
+
+    <!-- 结果显示框 -->
+    <TextView
+        android:id="@+id/input"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:layout_alignParentStart="true"
+        android:text=""
+        android:textColor="#FFFF"
+        android:textSize="24sp" />
+
+    <!-- 接下去采TableRow的格式进行布局设计 -->
+    <TableRow
+        android:id="@+id/tableRow1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/input"
+        android:layout_marginTop="21dp">
+        <!-- 用于显示存储结果 -->
+        <TextView
+            android:id="@+id/Mem"
+            android:layout_width="100dp"
+            android:layout_height="match_parent"
+            android:text="RES :"
+            android:textColor="#FFFF"
+            android:textSize="24sp" />
+
+        <TextView
+            android:id="@+id/MemInformation"
+            android:layout_width="300dp"
+            android:layout_height="match_parent"
+            android:textColor="#FFFF"
+            android:textSize="24sp" />
+
+        <!-- 默认显示字符串0 -->
+    </TableRow>
+
+    <TableRow
+        android:id="@+id/tableRow2"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginTop="25dp"
+        android:layout_below="@+id/tableRow1"
+        android:layout_alignParentStart="true">
+
+        <Button
+            android:id="@+id/buttonHex"
+            android:layout_width="140dp"
+            android:layout_height="match_parent"
+            android:background="#FFC125"
+            android:text="@string/buttonHex"
+            android:textColor="#fff"
+            android:textSize="30sp"
+            android:textStyle="bold" />
+
+        <Button
+            android:id="@+id/buttonUnit"
+            android:layout_width="140dp"
+            android:layout_height="match_parent"
+            android:background="#FFC125"
+            android:text="@string/buttonUnit"
+            android:textColor="#fff"
+            android:textSize="30sp"
+            android:textStyle="bold" />
+
+        <Button
+            android:id="@+id/buttonCE"
+            android:layout_width="130dp"
+            android:layout_height="match_parent"
+            android:background="#FFC125"
+            android:text="@string/buttonCE"
+            android:textColor="#fff"
+            android:textSize="30sp" />
+    </TableRow>
+
+    <TableRow
+        android:id="@+id/tableRow3"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_below="@+id/tableRow2"
+        android:layout_alignParentStart="true">
+        <!-- 数字1 -->
+        <Button
+            android:id="@+id/one"
+            android:layout_width="82dp"
+            android:layout_height="match_parent"
+            android:background="#FFEC8B"
+            android:text="@string/button1"
+            android:textColor="#fff"
+            android:textSize="30sp"
+            android:textStyle="bold" />
+        <!-- 数字2 -->
+        <Button
+            android:id="@+id/two"
+            android:layout_width="82dp"
+            android:layout_height="match_parent"
+            android:background="#FFEC8B"
+            android:text="@string/button2"
+            android:textColor="#fff"
+            android:textSize="30sp"
+            android:textStyle="bold" />
+        <!-- 数字3 -->
+        <Button
+            android:id="@+id/three"
+            android:layout_width="82dp"
+            android:layout_height="match_parent"
+            android:background="#FFEC8B"
+            android:text="@string/button3"
+            android:textColor="#fff"
+            android:textSize="30sp"
+            android:textStyle="bold" />
+
+        <Button
+            android:id="@+id/add"
+            android:layout_width="82dp"
+            android:layout_height="wrap_content"
+            android:background="#FFEC8B"
+            android:text="@string/buttonPlus"
+            android:textColor="#fff"
+            android:textSize="30sp"
+            android:textStyle="bold" />
+
+        <Button
+            android:id="@+id/sin"
+            android:layout_width="82dp"
+            android:layout_height="wrap_content"
+            android:background="#FFEC8B"
+            android:text="@string/buttonSin"
+            android:textColor="#fff"
+            android:textSize="30sp"
+            android:textStyle="bold" />
+
+    </TableRow>
+
+    <TableRow
+        android:id="@+id/tableRow4"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_below="@+id/tableRow2"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="48dp">
+
+        <Button
+            android:id="@+id/four"
+            android:layout_width="82dp"
+            android:layout_height="match_parent"
+            android:background="#FFEC8B"
+            android:text="@string/button4"
+            android:textColor="#fff"
+            android:textSize="30sp"
+            android:textStyle="bold" />
+
+        <Button
+            android:id="@+id/five"
+            android:layout_width="82dp"
+            android:layout_height="match_parent"
+            android:background="#FFEC8B"
+            android:text="@string/button5"
+            android:textColor="#fff"
+            android:textSize="30sp"
+            android:textStyle="bold" />
+
+        <Button
+            android:id="@+id/six"
+            android:layout_width="82dp"
+            android:layout_height="match_parent"
+            android:background="#FFEC8B"
+            android:text="@string/button6"
+            android:textColor="#fff"
+            android:textSize="30sp"
+            android:textStyle="bold" />
+
+        <Button
+            android:id="@+id/sub"
+            android:layout_width="82dp"
+            android:layout_height="match_parent"
+            android:background="#FFEC8B"
+            android:text="@string/buttonMinus"
+            android:textColor="#fff"
+            android:textSize="30sp"
+            android:textStyle="bold" />
+
+        <Button
+            android:id="@+id/cos"
+            android:layout_width="82dp"
+            android:layout_height="50dp"
+            android:background="#FFEC8B"
+            android:text="cos"
+            android:textColor="#fff"
+            android:textSize="30sp"
+            android:textStyle="bold" />
+    </TableRow>
+
+    <TableRow
+        android:id="@+id/tableRow5"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginTop="45dp"
+        android:layout_below="@+id/tableRow3"
+        android:layout_alignParentStart="true">
+        <!-- 数字7 -->
+        <Button
+            android:id="@+id/seven"
+            android:layout_width="82dp"
+            android:layout_height="match_parent"
+            android:background="#FFEC8B"
+            android:text="@string/button7"
+            android:textColor="#fff"
+            android:textSize="30sp"
+            android:textStyle="bold" />
+        <!-- 数字8 -->
+        <Button
+            android:id="@+id/eight"
+            android:layout_width="82dp"
+            android:layout_height="match_parent"
+            android:background="#FFEC8B"
+            android:text="@string/button8"
+            android:textColor="#fff"
+            android:textSize="30sp"
+            android:textStyle="bold" />
+        <!-- 数字9 -->
+        <Button
+            android:id="@+id/nine"
+            android:layout_width="82dp"
+            android:layout_height="match_parent"
+            android:background="#FFEC8B"
+            android:text="@string/button9"
+            android:textColor="#fff"
+            android:textSize="30sp"
+            android:textStyle="bold" />
+
+        <Button
+            android:id="@+id/buttonTimes"
+            android:layout_width="82dp"
+            android:layout_height="match_parent"
+            android:background="#FFEC8B"
+            android:text="@string/buttonTimes"
+            android:textColor="#fff"
+            android:textSize="30sp"
+            android:textStyle="bold" />
+
+        <Button
+            android:id="@+id/tan"
+            android:layout_width="82dp"
+            android:layout_height="match_parent"
+            android:background="#FFEC8B"
+            android:text="@string/buttonTan"
+            android:textColor="#fff"
+            android:textSize="30sp"
+            android:textStyle="bold" />
+
+    </TableRow>
+
+    <TableRow
+        android:id="@+id/tableRow6"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_below="@+id/tableRow5"
+        android:layout_centerHorizontal="true">
+
+        <Button
+            android:id="@+id/buttonIs"
+            android:layout_width="82dp"
+            android:layout_height="match_parent"
+            android:background="#FFEC8B"
+            android:text="@string/buttonIs"
+            android:textColor="#fff"
+            android:textSize="30sp"
+            android:textStyle="bold" />
+
+        <Button
+            android:id="@+id/zero"
+            android:layout_width="82dp"
+            android:layout_height="match_parent"
+            android:background="#FFEC8B"
+            android:text="@string/button0"
+            android:textColor="#fff"
+            android:textSize="30sp"
+            android:textStyle="bold" />
+
+        <Button
+            android:id="@+id/buttonPoint"
+            android:layout_width="82dp"
+            android:layout_height="match_parent"
+            android:background="#FFEC8B"
+            android:text="@string/buttonPoint"
+            android:textColor="#fff"
+            android:textSize="30sp"
+            android:textStyle="bold" />
+
+        <Button
+            android:id="@+id/buttonDivide"
+            android:layout_width="82dp"
+            android:layout_height="match_parent"
+            android:background="#FFEC8B"
+            android:text="@string/buttonDivided"
+            android:textColor="#fff"
+            android:textSize="30sp"
+            android:textStyle="bold" />
+
+        <Button
+            android:id="@+id/buttonN"
+            android:layout_width="82dp"
+            android:layout_height="match_parent"
+            android:background="#FFEC8B"
+            android:text="@string/buttonN"
+            android:textColor="#fff"
+            android:textSize="30sp"
+            android:textStyle="bold" />
+
+    </TableRow>
+
+    <TableRow
+        android:id="@+id/tableRow7"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginTop="51dp"
+        android:layout_below="@+id/tableRow5"
+        android:layout_alignParentStart="true">
+
+        <Button
+            android:id="@+id/lg"
+            android:layout_width="82dp"
+            android:layout_height="match_parent"
+            android:background="#FFEC8B"
+            android:text="@string/buttonLog"
+            android:textColor="#fff"
+            android:textSize="30sp"
+            android:textStyle="bold" />
+
+        <Button
+            android:id="@+id/ln"
+            android:layout_width="82dp"
+            android:layout_height="match_parent"
+            android:background="#FFEC8B"
+            android:text="@string/buttonLn"
+            android:textColor="#fff"
+            android:textSize="30sp"
+            android:textStyle="bold" />
+
+        <Button
+            android:id="@+id/buttonDel"
+            android:layout_width="82dp"
+            android:layout_height="match_parent"
+            android:background="#FFEC8B"
+            android:text="@string/buttonDel"
+            android:textColor="#fff"
+            android:textSize="30sp"
+            android:textStyle="bold" />
+
+        <Button
+            android:id="@+id/left"
+            android:layout_width="82dp"
+            android:layout_height="match_parent"
+            android:background="#FFEC8B"
+            android:text="@string/buttonLeft"
+            android:textColor="#fff"
+            android:textSize="30sp"
+            android:textStyle="bold" />
+
+        <Button
+            android:id="@+id/right"
+            android:layout_width="82dp"
+            android:layout_height="match_parent"
+            android:background="#FFEC8B"
+            android:text="@string/buttonRight"
+            android:textColor="#fff"
+            android:textSize="30sp"
+            android:textStyle="bold" />
+    </TableRow>
+
+</RelativeLayout>
